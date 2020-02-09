@@ -32,7 +32,7 @@ void * dequeue(queue * queue) {
         initialize(queue);
     else
         queue->tail = queue->tail->previous;
-
+	
     free(tail);
 
     return tail_value;

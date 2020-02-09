@@ -5,6 +5,8 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+
 #include "queue.h"
 
 void test_null_returned_when_queue_empty() {
@@ -27,7 +29,9 @@ void test_not_empty_after_enqueue() {
     queue queue;
     initialize(&queue);
 
-    enqueue(&queue, (void *)"hello");
+	char * buf = (char *)malloc(6);
+	strncpy(buf, "hello", 6);
+    enqueue(&queue, buf);
 
     assert(!empty(&queue));
 }
@@ -36,11 +40,14 @@ void test_correct_result_returned_after_enqueue() {
    queue queue;
    initialize(&queue);
 
-   enqueue(&queue, (void*)1);
-   int result = (int)dequeue(&queue);
+   char * buf = (char *)malloc(6);
+   strncpy(buf, "hello", 6);
+   enqueue(&queue, buf);
 
-   assert(result == 1);
+   char * result = (char *)dequeue(&queue);
 
+   assert(strncmp("hello", result, 6) == 0);
+   free(result);
 }
 
 void test_multiple_enqueues_returned_in_correct_order() {

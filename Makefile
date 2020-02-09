@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-OBJS := queue.o
+OBJS := queue.o bfs_traversal.o
 TEST_OBJS := bfs_test.o queue_tests.o
 TARGET := bfs
 TEST_TARGET := bfs_test
