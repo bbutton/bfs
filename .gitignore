@@ -1,3 +1,7 @@
+bfs_test
+bfs
+.idea/
+*~
 *.o
 *_tests
 

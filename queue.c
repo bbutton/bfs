@@ -3,8 +3,9 @@
 //
 
 #include <stdlib.h>
-#include <assert.h>
 #include <stdbool.h>
+
+#include "queue.h"
 
 typedef struct queue_node {
     struct queue_node * next;
@@ -12,10 +13,6 @@ typedef struct queue_node {
     void * value;
 } queue_node;
 
-typedef struct queue {
-    queue_node * head;
-    queue_node * tail;
-} queue;
 
 void initialize(queue * queue) {
     queue->head = queue->tail = NULL;
@@ -55,46 +52,5 @@ void enqueue(queue * queue, void * arg) {
         new_node->previous = queue->tail;
         queue->tail = new_node;
     }
-}
-
-void test_null_returned_when_queue_empty() {
-    queue queue;
-    initialize(&queue);
-
-    void * object = dequeue(&queue);
-
-    assert(object == NULL);
-}
-
-void test_is_empty_when_queue_empty() {
-    queue queue;
-    initialize(&queue);
-
-    assert(empty(&queue));
-}
-
-void test_not_empty_after_enqueue() {
-    queue queue;
-    initialize(&queue);
-
-    enqueue(&queue, (void *)"hello");
-
-    assert(!empty(&queue));
-}
-
-
-
-//void test_non_null_returned_after_single_push() {
-//    queue queue;
-//    initialize(&queue);
-//
-//    enqueue((void*)1);
-//
-//}
-
-int main(int argc, char ** argv) {
-    test_null_returned_when_queue_empty();
-    test_is_empty_when_queue_empty();
-    test_not_empty_after_enqueue();
 }
 
