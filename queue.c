@@ -43,14 +43,14 @@ void enqueue(queue * queue, void * arg) {
     new_node->value = arg;
 
     if(empty(queue)) {
-        queue->head = queue->tail = new_node;
-        new_node->previous = NULL;
-        new_node->next = NULL;
+	  queue->head = queue->tail = new_node;
+	  new_node->previous = NULL;
+	  new_node->next = NULL;
     } else {
-        queue->tail->next = new_node;
-        new_node->next = NULL;
-        new_node->previous = queue->tail;
-        queue->tail = new_node;
+	  new_node->next = queue->head;
+	  new_node->previous = NULL;
+	  queue->head->previous = new_node;
+	  queue->head = new_node;
     }
 }
 
